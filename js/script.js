@@ -1,6 +1,8 @@
 var cityInputEl = document.querySelector('#city-name');
 var weatherContainerEl = document.querySelector('#weather-container');
 var cityFormEl = document.querySelector('#city-form');
+var cityLat = 0;
+var cityLon = 0;
 
 var city_name = 'London';
 var mykey = API_key;
@@ -44,6 +46,18 @@ var displayWeather = function (input) {
   return;
 }      
 
+var displayForcast = function (input) {
+//  var result = input.name;
+//  var currentDate = moment().format('L');
+// result += " " + currentDate;
+//  $(".current-city").html(result);
+//  $("#temp").html("Temp: " + input.main.temp + "&deg;F");
+//  $("#wind").html("Wind: " + input.wind.speed + " MPH");
+//  $("#humidity").html("Humidity: " + input.main.humidity + "%");
+  $("#uvindex").html("UV Index " + input.current.uvi);
+  return;
+}  
+
 var getCityWeather = function (city) {
 //          console.log(city);
   var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=' + mykey;
@@ -54,8 +68,9 @@ var getCityWeather = function (city) {
         response.json().then(function (data) {
           console.log(data);
           displayWeather(data);
-          console.log(data.coord.lat);
-          console.log(data.coord.lon);
+          cityLat = data.coord.lat;
+          cityLon = data.coord.lon;
+          getCityForcast(cityLat, cityLon);
         });
       } else {
         alert('Error: ' + response.statusText);
@@ -66,7 +81,26 @@ var getCityWeather = function (city) {
     });
 };
 
+var getCityForcast = function (latitude, longitude) {
+//    var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=' + mykey;
+    var apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitude + '&lon=' + longitude + '&exclude=hourly&appid=' + mykey;
   
+    fetch(apiUrl)
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (data) {
+            console.log(data);
+            displayForcast(data);
+          });
+        } else {
+          alert('Error: ' + response.statusText);
+        }
+      })
+      .catch(function (error) {
+        alert('Unable to connect to OpenWeather');
+      });
+  };
+
       cityFormEl.addEventListener('submit', formSubmitHandler);
 
 //      console.log(city_name);
