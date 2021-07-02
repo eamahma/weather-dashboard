@@ -3,7 +3,7 @@ var weatherContainerEl = document.querySelector('#weather-container');
 var cityFormEl = document.querySelector('#city-form');
 
 var city_name = 'London';
-var API_key = "11f9582ece85ca8ef8b9f2b18446e134";
+var mykey = config.API_key;
 var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city_name + '&appid=' + API_key;
 
 fetch(apiUrl)
@@ -46,7 +46,7 @@ var displayWeather = function (input) {
 
 var getCityWeather = function (city) {
 //          console.log(city);
-  var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=' + API_key;
+  var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=' + mykey;
 
   fetch(apiUrl)
     .then(function (response) {
@@ -54,6 +54,8 @@ var getCityWeather = function (city) {
         response.json().then(function (data) {
           console.log(data);
           displayWeather(data);
+          console.log(data.coord.lat);
+          console.log(data.coord.lon);
         });
       } else {
         alert('Error: ' + response.statusText);
