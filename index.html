@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+    crossorigin="anonymous"
+  />
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./css/style.css" />
+    <title>Weather Dashboard</title>
+</head>
+<body>
+
+    <main class="flex-row justify-space-between">
+        <div class="col-12 col-md-4">
+    
+          <div class="card">
+            <h3 class="card-header text-uppercase">Search for a City</h3>
+            <form id="city-form" class="card-body">
+              <label class="form-label" for="username"></label>
+              <input name="city-name" id="city-name" type="text" autofocus="true" class="form-input" />
+              <button type="submit" class="btn">Search</button>
+            </form>
+          </div>
+    
+          <div class="card">
+            <!-- <h3 class="card-header text-uppercase">Search By Topic</h3> -->
+            <ul id="recent-cities" class="card-body">
+              <li class="city-list" id="0"></li>
+              <li class="city-list" id="2"></li>
+              <li class="city-list" id="3"></li>
+              <li class="city-list" id="4"></li>
+              <li class="city-list" id="5"></li>
+              <li class="city-list" id="6"></li>
+              <li class="city-list" id="7"></li>
+            </ul>
+          </div>
+        </div>
+    
+        <div class="col-12 col-md-8">
+          <h2 class="current-city"><span id="date"></span></h2>
+          <div id="temp" class="current-weather"></div>
+          <div id="wind" class="current-weather"></div>
+          <div id="humidity" class="current-weather"></div>
+          <div id="uvindex" class="current-weather"></div>
+        </div>
+      </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>    
+    <script src="./js/script.js"></script>
+</body>
+</html>
