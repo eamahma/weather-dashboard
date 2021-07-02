@@ -1,6 +1,8 @@
-var cityInputEl = document.querySelector('#city-name');
+//var cityInputEl = document.querySelector('#city-name');
+var cityInputEl = document.querySelector('.input');
 var weatherContainerEl = document.querySelector('#weather-container');
-var cityFormEl = document.querySelector('#city-form');
+//var cityFormEl = document.querySelector('#city-form');
+var cityFormEl = document.querySelector('.button');
 var cityLat = 0;
 var cityLon = 0;
 
@@ -21,7 +23,7 @@ fetch(apiUrl)
         event.preventDefault();
       
         var city = cityInputEl.value.trim();
-  //      console.log(city);
+        console.log(city);
   //      city_name = city;
       
         if (city) {
@@ -38,9 +40,10 @@ fetch(apiUrl)
 var displayWeather = function (input) {
   var result = input.name;
   var currentDate = moment().format('L');
-  result += " " + currentDate;
-  $(".current-city").html(result);
-  $("#temp").html("Temp: " + input.main.temp + "&deg;F");
+//  result += " " + currentDate;
+$("#current-city").html("City: " + result);
+$("#current-date").html("Today: " + currentDate);
+$("#temp").html("Temp: " + input.main.temp + "&deg;F");
   $("#wind").html("Wind: " + input.wind.speed + " MPH");
   $("#humidity").html("Humidity: " + input.main.humidity + "%");
   return;
@@ -54,7 +57,7 @@ var displayForcast = function (input) {
 //  $("#temp").html("Temp: " + input.main.temp + "&deg;F");
 //  $("#wind").html("Wind: " + input.wind.speed + " MPH");
 //  $("#humidity").html("Humidity: " + input.main.humidity + "%");
-  $("#uvindex").html("UV Index " + input.current.uvi);
+  $("#uvindex").html("UV Index: " + input.current.uvi);
   return;
 }  
 
@@ -101,7 +104,7 @@ var getCityForcast = function (latitude, longitude) {
       });
   };
 
-      cityFormEl.addEventListener('submit', formSubmitHandler);
+      cityFormEl.addEventListener('click', formSubmitHandler);
 
 //      console.log(city_name);
 
