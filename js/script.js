@@ -3,7 +3,7 @@ var weatherContainerEl = document.querySelector('#weather-container');
 var cityFormEl = document.querySelector('#city-form');
 
 var city_name = 'London';
-var mykey = config.API_key;
+var mykey = API_key;
 var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city_name + '&appid=' + API_key;
 
 fetch(apiUrl)
