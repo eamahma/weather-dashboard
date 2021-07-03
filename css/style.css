@@ -6,3 +6,9 @@
 #today-box {
     background-color: lightgray;
   }
+
+.forecast {
+  border: solid 1px black;
+  margin: auto;
+  color: white;
+}

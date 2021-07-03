@@ -43,7 +43,7 @@ var displayWeather = function (input) {
 //  result += " " + currentDate;
 $("#current-city").html("City: " + result);
 var weatherIcon = "http://openweathermap.org/img/wn/" + input.weather[0].icon + "@2x.png"
-$(".image").children("img").attr("src", weatherIcon);
+$("#current-image").children("img").attr("src", weatherIcon);
 $("#current-date").html("Today: " + currentDate);
 $("#temp").html("Temp: " + input.main.temp + "&deg;F");
   $("#wind").html("Wind: " + input.wind.speed + " MPH");
@@ -69,6 +69,28 @@ var displayForcast = function (input) {
   } else {
     $("#uvi-color").attr("style", "background-color: red; padding: .5em; border-radius:20%")
   }
+
+  var date = moment().add(1,'days').format('L');
+  $("#day1").html(date);
+  var weatherIcon = "http://openweathermap.org/img/wn/" + input.daily[0].weather[0].icon + "@2x.png"
+  console.log(input.daily[0].weather[0].icon);
+  $("#day1-image").children("img").attr("src", weatherIcon);
+  $("#day1-temp").html("Temp: " + input.daily[0].temp.day + "&deg;F");
+  console.log(input.daily[0].temp.day);
+  $("#day1-wind").html("Wind: " + input.daily[0].wind_speed + " MPH");
+  $("#day1-humidity").html("Humidity: " + input.daily[0].humidity + "%");
+
+  // var date = moment().add(2,'days').format('L');
+  // $("#day2").html(date);
+  // var weatherIcon = "http://openweathermap.org/img/wn/" + input.daily[1].weather[0].icon + "@2x.png"
+  // console.log(input.daily[1].weather[0].icon);
+  // $("#day2-image").attr("src", weatherIcon);
+  // $("#day2-temp").html("Temp: " + input.daily[1].temp.day + "&deg;F");
+  // console.log(input.daily[1].temp.day);
+  // $("#day2-wind").html("Wind: " + input.daily[1].wind_speed + " MPH");
+  // $("#day2-humidity").html("Humidity: " + input.daily[1].humidity + "%");
+
+
   return;
 }  
 

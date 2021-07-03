@@ -34,7 +34,7 @@
           </article>
         </div> -->
 
-        <!-- <div class="tile is-parent is-10">
+      <!-- <div class="tile is-parent is-10">
           <article class="tile is-child box" id="today-box">
             <p class="title" id="current-city" display="inline">City Name:
             <figure class="image is-64x64">
@@ -53,19 +53,26 @@
 
       <div class="columns is-3">
         <div class="column is-one-fifth">
-          <div class="field">
-            <label class="label">Enter the City name</label>
-            <div class="control">
-              <input class="input" type="text" placeholder="city name ...">
+          <div class="box">
+            <div class="field">
+              <label class="label">Enter the City name</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="city name ...">
+              </div>
             </div>
+            <button class="button is-primary">Search</button>
           </div>
-          <button class="button is-primary">Search</button>
-    </div>
+          <div class="box">
+            index
+          </div>
+        </div>
         <div class="column is-four-fifths">
-          <p class="title" id="current-city" display="inline">City Name:
-            <figure class="image is-64x64">
+          <div class="box" id="today-box">
+            <p class="title" id="current-city" display="inline">City Name:
+            <figure class="image is-64x64" id="current-image">
               <img src="https://bulma.io/images/placeholders/24x24.png">
-            </figure></p>          
+            </figure>
+            </p>
             <p class="subtitle" id="current-date">Today: </p>
             <div class="content">
               <p id="temp">Temp:</p>
@@ -73,22 +80,70 @@
               <p id="humidity">Humidity:</p>
               <p id="uvindex">UVI Index: <span id="uvi-color"></span></p>
             </div>
-        </div>      </div>
-
-
-      <div class="columns">
-        <!-- <div class="column is-one-fifth">
-          <input class="input" type="text" placeholder="City">
-          <button class="button is-medium hover is-fullwidth">Search</button>
-        </div> -->
-        <div class="columns">
-          <div class="column forecast">Day1</div>
-          <div class="column forecast">Day2</div>
-          <div class="column forecast">Day3</div>
-          <div class="column forecast">Day4</div>
-          <div class="column forecast">Day5</div>
+          </div>
+          <div class="columns is-3-desktop">
+            <div class="column  is-one-fifth">
+              <div class="box  forecast" >
+                <p class="title" id="day1" display="inline">Day1
+                <figure class="image is-64x64" id="day1-image">
+                  <img src="">
+                </figure>
+                <p id="day1-temp">Temp:</p>
+                <p id="day1-wind">Wind:</p>
+                <p id="day1-humidity">Humidity:</p>
+                </p>
+              </div>
+            </div>
+            <div class="column  is-one-fifth">
+              <div class="box forecast" id="day2">
+                Day2
+                <figure class="image is-64x64">
+                  <img src="" id="day2-image">
+                </figure>
+                <p id="day2-temp">Temp:</p>
+                <p id="day2-wind">Wind:</p>
+                <p id="day2-humidity">Humidity:</p>
+              </div>
+            </div>
+            <div class="column  is-one-fifth">
+              <div class="box forecast" id="day3">
+                Day3
+                <figure class="image is-64x64">
+                  <img src="" id="day3-image">
+                </figure>
+                <p id="day3-temp">Temp:</p>
+                <p id="day3-wind">Wind:</p>
+                <p id="day3-humidity">Humidity:</p>
+              </div>
+            </div>
+            <div class="column  is-one-fifth">
+              <div class="box forecast" id="day4">
+                Day4
+                <figure class="image is-64x64">
+                  <img src="" id="day4-image">
+                </figure>
+                <p id="day4-temp">Temp:</p>
+                <p id="day4-wind">Wind:</p>
+                <p id="day4-humidity">Humidity:</p>
+              </div>
+            </div>
+            <div class="column  is-one-fifth">
+              <div class="box forecast" id="day5">
+                Day5
+                <figure class="image is-64x64">
+                  <img src="" id="day5-image">
+                </figure>
+                <p id="day5-temp">Temp:</p>
+                <p id="day5-wind">Wind:</p>
+                <p id="day5-humidity">Humidity:</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+
+
     </div>
   </section>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
