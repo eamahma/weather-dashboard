@@ -5,6 +5,7 @@ var weatherContainerEl = document.querySelector('#weather-container');
 var cityFormEl = document.querySelector('.button');
 var cityLat = 0;
 var cityLon = 0;
+const input = document.querySelector('input');
 
 var city_name = 'London';
 var mykey = API_key;
@@ -80,16 +81,45 @@ var displayForcast = function (input) {
   $("#day1-wind").html("Wind: " + input.daily[0].wind_speed + " MPH");
   $("#day1-humidity").html("Humidity: " + input.daily[0].humidity + "%");
 
-  // var date = moment().add(2,'days').format('L');
-  // $("#day2").html(date);
-  // var weatherIcon = "http://openweathermap.org/img/wn/" + input.daily[1].weather[0].icon + "@2x.png"
-  // console.log(input.daily[1].weather[0].icon);
-  // $("#day2-image").attr("src", weatherIcon);
-  // $("#day2-temp").html("Temp: " + input.daily[1].temp.day + "&deg;F");
-  // console.log(input.daily[1].temp.day);
-  // $("#day2-wind").html("Wind: " + input.daily[1].wind_speed + " MPH");
-  // $("#day2-humidity").html("Humidity: " + input.daily[1].humidity + "%");
+  var date = moment().add(2,'days').format('L');
+  $("#day2").html(date);
+  var weatherIcon = "http://openweathermap.org/img/wn/" + input.daily[1].weather[0].icon + "@2x.png"
+  console.log(input.daily[1].weather[0].icon);
+  $("#day2-image").children("img").attr("src", weatherIcon);
+  $("#day2-temp").html("Temp: " + input.daily[1].temp.day + "&deg;F");
+  console.log(input.daily[1].temp.day);
+  $("#day2-wind").html("Wind: " + input.daily[1].wind_speed + " MPH");
+  $("#day2-humidity").html("Humidity: " + input.daily[1].humidity + "%");
 
+  var date = moment().add(2,'days').format('L');
+  $("#day3").html(date);
+  var weatherIcon = "http://openweathermap.org/img/wn/" + input.daily[2].weather[0].icon + "@2x.png"
+  console.log(input.daily[2].weather[0].icon);
+  $("#day3-image").children("img").attr("src", weatherIcon);
+  $("#day3-temp").html("Temp: " + input.daily[2].temp.day + "&deg;F");
+  console.log(input.daily[2].temp.day);
+  $("#day3-wind").html("Wind: " + input.daily[2].wind_speed + " MPH");
+  $("#day3-humidity").html("Humidity: " + input.daily[2].humidity + "%");
+
+  var date = moment().add(3,'days').format('L');
+  $("#day4").html(date);
+  var weatherIcon = "http://openweathermap.org/img/wn/" + input.daily[3].weather[0].icon + "@2x.png"
+  console.log(input.daily[3].weather[0].icon);
+  $("#day4-image").children("img").attr("src", weatherIcon);
+  $("#day4-temp").html("Temp: " + input.daily[3].temp.day + "&deg;F");
+  console.log(input.daily[3].temp.day);
+  $("#day4-wind").html("Wind: " + input.daily[3].wind_speed + " MPH");
+  $("#day4-humidity").html("Humidity: " + input.daily[3].humidity + "%");
+
+  var date = moment().add(4,'days').format('L');
+  $("#day5").html(date);
+  var weatherIcon = "http://openweathermap.org/img/wn/" + input.daily[4].weather[0].icon + "@2x.png"
+  console.log(input.daily[4].weather[0].icon);
+  $("#day5-image").children("img").attr("src", weatherIcon);
+  $("#day5-temp").html("Temp: " + input.daily[4].temp.day + "&deg;F");
+  console.log(input.daily[4].temp.day);
+  $("#day5-wind").html("Wind: " + input.daily[4].wind_speed + " MPH");
+  $("#day5-humidity").html("Humidity: " + input.daily[4].humidity + "%");
 
   return;
 }  
@@ -119,7 +149,7 @@ var getCityWeather = function (city) {
 
 var getCityForcast = function (latitude, longitude) {
 //    var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=' + mykey;
-    var apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitude + '&lon=' + longitude + '&exclude=hourly&appid=' + mykey;
+    var apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitude + '&lon=' + longitude + '&exclude=hourly&units=imperial&appid=' + mykey;
   
     fetch(apiUrl)
       .then(function (response) {
@@ -138,6 +168,7 @@ var getCityForcast = function (latitude, longitude) {
   };
 
       cityFormEl.addEventListener('click', formSubmitHandler);
+      input.addEventListener('change', formSubmitHandler);
 
 //      console.log(city_name);
 
