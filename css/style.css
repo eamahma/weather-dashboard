@@ -2,3 +2,7 @@
   .forecast {
     background-color: navy;
   }
+
+#today-box {
+    background-color: lightgray;
+  }

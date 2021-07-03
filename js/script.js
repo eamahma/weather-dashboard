@@ -42,6 +42,8 @@ var displayWeather = function (input) {
   var currentDate = moment().format('L');
 //  result += " " + currentDate;
 $("#current-city").html("City: " + result);
+var weatherIcon = "http://openweathermap.org/img/wn/" + input.weather[0].icon + "@2x.png"
+$(".image").children("img").attr("src", weatherIcon);
 $("#current-date").html("Today: " + currentDate);
 $("#temp").html("Temp: " + input.main.temp + "&deg;F");
   $("#wind").html("Wind: " + input.wind.speed + " MPH");
@@ -57,7 +59,16 @@ var displayForcast = function (input) {
 //  $("#temp").html("Temp: " + input.main.temp + "&deg;F");
 //  $("#wind").html("Wind: " + input.wind.speed + " MPH");
 //  $("#humidity").html("Humidity: " + input.main.humidity + "%");
-  $("#uvindex").html("UV Index: " + input.current.uvi);
+  $("#uvi-color").html(input.current.uvi);
+  if (input.current.uvi < 3) {
+    $("#uvi-color").attr("style", "background-color: lightgreen; padding: .5em; border-radius:20%")
+  } else if (input.current.uvi < 6) {
+    $("#uvi-color").attr("style", "background-color: yellow; padding: .5em; border-radius:20%")
+  } else if (input.current.uvi < 8) {
+    $("#uvi-color").attr("style", "background-color: orange; padding: .5em; border-radius:20%")
+  } else {
+    $("#uvi-color").attr("style", "background-color: red; padding: .5em; border-radius:20%")
+  }
   return;
 }  
 
