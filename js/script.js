@@ -7,12 +7,14 @@ var searchBoxEl = document.querySelector('#seachbox');
 var cityLat = 0;
 var cityLon = 0;
 const input = document.querySelector('input');
+var cityArray = [];
 
 var city_name = 'London';
 var mykey = API_key;
 var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city_name + '&appid=' + API_key;
 
-fetch(apiUrl)
+$(document).ready(function() {
+  fetch(apiUrl)
     .then(function (response) {
       return response.json();
     })
@@ -23,10 +25,11 @@ fetch(apiUrl)
 
     var formSubmitHandler = function (event) {
         event.preventDefault();
+
       
         var city = cityInputEl.value.trim();
         if (city) {
-           getCityWeather(city);
+          getCityWeather(city);
           cityInputEl.value = '';
         } else {
           alert('Please enter a City name');
@@ -45,9 +48,14 @@ $("#temp").html("Temp: " + input.main.temp + "&deg;F");
   $("#wind").html("Wind: " + input.wind.speed + " MPH");
   $("#humidity").html("Humidity: " + input.main.humidity + "%");
   return;
-}      
+}
+ 
 
 var displayForcast = function (input) {
+
+  for (var i = 0; i < cityArray.length; i++){
+    $("#M"+ i).text(localStorage.getItem(i));
+  }
 
   // UV index display on today forecast and background color
   $("#uvi-color").html(input.current.uvi);
@@ -116,6 +124,8 @@ var getCityWeather = function (city) {
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
+          cityArray.unshift(city);
+          storeCity();
           displayWeather(data);
           cityLat = data.coord.lat;
           cityLon = data.coord.lon;
@@ -149,5 +159,60 @@ var getCityForcast = function (latitude, longitude) {
       });
   };
 
+  var storeCity = function () {
+    for (var i = 0; i < 8; i ++){
+      localStorage.setItem(i, cityArray[i]);
+    }
+    return;
+  };
+ 
+// set the time blocks color based on current time
+// $.each(cityArray, function (i) {
+//   $("#M"+ i).text(localStorage.getItem(i));
+//   console.log("#M" + i, i, cityArray[i]);
+//   return;
+// });
+  
 // eventlistner on both text change and dblclick
   $('#searchbox').on('change dblclick', formSubmitHandler);
+
+  $('#M0').on('click', function(){
+    cityInputEl.value = $('#M0').text();
+    getCityWeather(cityInputEl.value);
+  })
+
+  $('#M1').on('click', function(){
+    cityInputEl.value = $('#M1').text();
+    getCityWeather(cityInputEl.value);
+  })
+
+  $('#M2').on('click', function(){
+    cityInputEl.value = $('#M2').text();
+    getCityWeather(cityInputEl.value);
+  })
+
+  $('#M3').on('click', function(){
+    cityInputEl.value = $('#M3').text();
+    getCityWeather(cityInputEl.value);
+  })
+
+  $('#M4').on('click', function(){
+    cityInputEl.value = $('#M4').text();
+    getCityWeather(cityInputEl.value);
+  })
+
+  $('#M5').on('click', function(){
+    cityInputEl.value = $('#M5').text();
+    getCityWeather(cityInputEl.value);
+  })
+
+  $('#M6').on('click', function(){
+    cityInputEl.value = $('#M6').text();
+    getCityWeather(cityInputEl.value);
+  })
+
+  $('#M7').on('click', function(){
+    cityInputEl.value = $('#M7').text();
+    getCityWeather(cityInputEl.value);
+  })
+})
