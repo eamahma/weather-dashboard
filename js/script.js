@@ -8,25 +8,25 @@ var cityLat = 0;
 var cityLon = 0;
 const input = document.querySelector('input');
 var cityArray = [];
+cityArray.length = 8;
 
 var city_name = 'London';
 var mykey = API_key;
 var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city_name + '&appid=' + API_key;
 
 $(document).ready(function() {
+
+
   fetch(apiUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-//      console.log(data);
     });
-
 
     var formSubmitHandler = function (event) {
         event.preventDefault();
-
-      
+     
         var city = cityInputEl.value.trim();
         if (city) {
           getCityWeather(city);
@@ -40,11 +40,11 @@ $(document).ready(function() {
 var displayWeather = function (input) {
   var result = input.name;
   var currentDate = moment().format('L');
-$("#current-city").html("City: " + result);
-var weatherIcon = "http://openweathermap.org/img/wn/" + input.weather[0].icon + "@2x.png"
-$("#current-image").children("img").attr("src", weatherIcon);
-$("#current-date").html("Today: " + currentDate);
-$("#temp").html("Temp: " + input.main.temp + "&deg;F");
+  $("#current-city").html("City: " + result);
+  var weatherIcon = "http://openweathermap.org/img/wn/" + input.weather[0].icon + "@2x.png"
+  $("#current-image").children("img").attr("src", weatherIcon);
+  $("#current-date").html("Today: " + currentDate);
+  $("#temp").html("Temp: " + input.main.temp + "&deg;F");
   $("#wind").html("Wind: " + input.wind.speed + " MPH");
   $("#humidity").html("Humidity: " + input.main.humidity + "%");
   return;
@@ -124,8 +124,7 @@ var getCityWeather = function (city) {
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          removeDuplicates(city);
-//          cityArray.unshift(city);
+          removeDuplicates(data.name);
           storeCity();
           displayWeather(data);
           cityLat = data.coord.lat;
@@ -142,9 +141,11 @@ var getCityWeather = function (city) {
 };
 
 var removeDuplicates = function(input){
-  const index = cityArray.indexOf(input);
-  if (index > -1) {
-    cityArray.splice(index, 1);
+  if (cityArray.length > 0){
+    const index = cityArray.indexOf(input);
+    if (index > -1) {
+      cityArray.splice(index, 1);
+    }
   }
   console.log(input);
   cityArray.unshift(input);
@@ -175,13 +176,6 @@ var getCityForcast = function (latitude, longitude) {
     }
     return;
   };
- 
-// set the time blocks color based on current time
-// $.each(cityArray, function (i) {
-//   $("#M"+ i).text(localStorage.getItem(i));
-//   console.log("#M" + i, i, cityArray[i]);
-//   return;
-// });
   
 // eventlistner on both text change and dblclick
   $('#searchbox').on('change dblclick', formSubmitHandler);
@@ -225,4 +219,11 @@ var getCityForcast = function (latitude, longitude) {
     cityInputEl.value = $('#M7').text();
     getCityWeather(cityInputEl.value);
   })
+
+  // read previous cities searched from localStorage
+  $.each(cityArray, function (i) {
+    cityArray[i] = localStorage.getItem(i);
+    $("#M"+ i).text(cityArray[i]);
+    return;
+  });
 })

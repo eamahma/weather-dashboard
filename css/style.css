@@ -1,13 +1,10 @@
 
-  .forecast {
-    background-color: navy;
-  }
-
 #today-box {
     background-color: lightgray;
   }
 
 .forecast {
+  background-color: navy;
   border: solid 1px black;
   margin: auto;
   color: white;
