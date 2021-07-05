@@ -16,7 +16,6 @@ var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city_name + 
 
 $(document).ready(function() {
 
-
   fetch(apiUrl)
     .then(function (response) {
       return response.json();
@@ -39,7 +38,8 @@ $(document).ready(function() {
 
 var displayWeather = function (input) {
   var result = input.name;
-  var currentDate = moment().format('L');
+  var utcoffset = input.timezone / 60;
+  var currentDate = moment().utcOffset(utcoffset).format('L');
   $("#current-city").html("City: " + result);
   var weatherIcon = "http://openweathermap.org/img/wn/" + input.weather[0].icon + "@2x.png"
   $("#current-image").children("img").attr("src", weatherIcon);
@@ -68,9 +68,9 @@ var displayForcast = function (input) {
   } else {
     $("#uvi-color").attr("style", "background-color: red; padding: .5em; border-radius:20%")
   }
-
+  var utcoffset = input.timezone_offset / 60;
   // Day 1 forcast
-  var date = moment().add(1,'days').format('L');
+  var date = moment().utcOffset(utcoffset).add(1,'days').format('L');
   $("#day1").html(date);
   var weatherIcon = "http://openweathermap.org/img/wn/" + input.daily[0].weather[0].icon + "@2x.png"
   $("#day1-image").children("img").attr("src", weatherIcon);
@@ -79,7 +79,7 @@ var displayForcast = function (input) {
   $("#day1-humidity").html("Humidity: " + input.daily[0].humidity + "%");
 
   // Day 2 forcast
-  var date = moment().add(2,'days').format('L');
+  var date = moment().utcOffset(utcoffset).add(2,'days').format('L');
   $("#day2").html(date);
   var weatherIcon = "http://openweathermap.org/img/wn/" + input.daily[1].weather[0].icon + "@2x.png"
   $("#day2-image").children("img").attr("src", weatherIcon);
@@ -88,7 +88,7 @@ var displayForcast = function (input) {
   $("#day2-humidity").html("Humidity: " + input.daily[1].humidity + "%");
 
   // Day 3 forcast
-  var date = moment().add(3,'days').format('L');
+  var date = moment().utcOffset(utcoffset).add(3,'days').format('L');
   $("#day3").html(date);
   var weatherIcon = "http://openweathermap.org/img/wn/" + input.daily[2].weather[0].icon + "@2x.png"
   $("#day3-image").children("img").attr("src", weatherIcon);
@@ -97,7 +97,7 @@ var displayForcast = function (input) {
   $("#day3-humidity").html("Humidity: " + input.daily[2].humidity + "%");
 
   // Day 4 forcast
-  var date = moment().add(4,'days').format('L');
+  var date = moment().utcOffset(utcoffset).add(4,'days').format('L');
   $("#day4").html(date);
   var weatherIcon = "http://openweathermap.org/img/wn/" + input.daily[3].weather[0].icon + "@2x.png"
   $("#day4-image").children("img").attr("src", weatherIcon);
@@ -106,7 +106,7 @@ var displayForcast = function (input) {
   $("#day4-humidity").html("Humidity: " + input.daily[3].humidity + "%");
 
   // Day 5 forcast
-  var date = moment().add(5,'days').format('L');
+  var date = moment().utcOffset(utcoffset).add(5,'days').format('L');
   $("#day5").html(date);
   var weatherIcon = "http://openweathermap.org/img/wn/" + input.daily[4].weather[0].icon + "@2x.png"
   $("#day5-image").children("img").attr("src", weatherIcon);
@@ -124,6 +124,7 @@ var getCityWeather = function (city) {
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
+//          console.log(data);
           removeDuplicates(data.name);
           storeCity();
           displayWeather(data);
@@ -147,18 +148,18 @@ var removeDuplicates = function(input){
       cityArray.splice(index, 1);
     }
   }
-  console.log(input);
+//  console.log(input);
   cityArray.unshift(input);
   return;
   };
 
 var getCityForcast = function (latitude, longitude) {
     var apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitude + '&lon=' + longitude + '&exclude=hourly&units=imperial&appid=' + mykey;
-  
     fetch(apiUrl)
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
+//            console.log(data);
             displayForcast(data);
           });
         } else {
