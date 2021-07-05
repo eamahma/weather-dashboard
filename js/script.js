@@ -124,13 +124,14 @@ var getCityWeather = function (city) {
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          cityArray.unshift(city);
+          removeDuplicates(city);
+//          cityArray.unshift(city);
           storeCity();
           displayWeather(data);
           cityLat = data.coord.lat;
           cityLon = data.coord.lon;
           getCityForcast(cityLat, cityLon);
-        });
+         });
       } else {
         alert('Error: ' + response.statusText);
       }
@@ -140,8 +141,17 @@ var getCityWeather = function (city) {
     });
 };
 
+var removeDuplicates = function(input){
+  const index = cityArray.indexOf(input);
+  if (index > -1) {
+    cityArray.splice(index, 1);
+  }
+  console.log(input);
+  cityArray.unshift(input);
+  return;
+  };
+
 var getCityForcast = function (latitude, longitude) {
-//    var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=' + mykey;
     var apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitude + '&lon=' + longitude + '&exclude=hourly&units=imperial&appid=' + mykey;
   
     fetch(apiUrl)
