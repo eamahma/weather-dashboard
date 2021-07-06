@@ -30,3 +30,8 @@ The following image shows the web application's appearance and functionality:
 
 ![The weather app includes a search option, a list of cities, and a five-day forecast and current weather conditions for Atlanta.](./img/weather_dashboard.png)
 
+## Link to web page
+[Weather Dashboard](https://eamahma.github.io/weather-dashboard/)
+
+## Link to Github repository
+[Github page for Weather Dashboard](https://github.com/eamahma/weather-dashboard)
