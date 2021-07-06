@@ -50,7 +50,7 @@ var displayWeather = function (input) {
   return;
 }
  
-
+// function to display forecast
 var displayForcast = function (input) {
 
   for (var i = 0; i < cityArray.length; i++){
@@ -124,23 +124,28 @@ var getCityWeather = function (city) {
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-//          console.log(data);
+          // function to remove any repeated entry from search and add it to the top
           removeDuplicates(data.name);
+          // store new city to local storage
           storeCity();
+          // display current wether
           displayWeather(data);
+          // get coordinates from first call based on city entered
           cityLat = data.coord.lat;
           cityLon = data.coord.lon;
+          // function to get forecast
           getCityForcast(cityLat, cityLon);
          });
       } else {
         alert('Error: ' + response.statusText);
       }
     })
-    .catch(function (error) {
-      alert('Unable to connect to OpenWeather');
+    .catch(function (error) {      
+    alert('Unable to connect to OpenWeather');
     });
 };
 
+// function to remove any duplicte entery already in the list
 var removeDuplicates = function(input){
   if (cityArray.length > 0){
     const index = cityArray.indexOf(input);
@@ -148,18 +153,19 @@ var removeDuplicates = function(input){
       cityArray.splice(index, 1);
     }
   }
-//  console.log(input);
+  // push new entery to begining of array
   cityArray.unshift(input);
   return;
   };
 
-var getCityForcast = function (latitude, longitude) {
+  // function to get five days forecast based on coordinates  
+  var getCityForcast = function (latitude, longitude) {
     var apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitude + '&lon=' + longitude + '&exclude=hourly&units=imperial&appid=' + mykey;
     fetch(apiUrl)
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
-//            console.log(data);
+            // function to display forecast
             displayForcast(data);
           });
         } else {
@@ -171,6 +177,7 @@ var getCityForcast = function (latitude, longitude) {
       });
   };
 
+  // function to to store array to localStorage
   var storeCity = function () {
     for (var i = 0; i < 8; i ++){
       localStorage.setItem(i, cityArray[i]);
@@ -178,50 +185,58 @@ var getCityForcast = function (latitude, longitude) {
     return;
   };
   
-// eventlistner on both text change and dblclick
+  // eventlistner on both text change and dblclick
   $('#searchbox').on('change dblclick', formSubmitHandler);
 
+  // function to display memory location 0 if clicked
   $('#M0').on('click', function(){
     cityInputEl.value = $('#M0').text();
     getCityWeather(cityInputEl.value);
   })
 
+  // function to display memory location 1 if clicked
   $('#M1').on('click', function(){
     cityInputEl.value = $('#M1').text();
     getCityWeather(cityInputEl.value);
   })
 
+  // function to display memory location 2 if clicked
   $('#M2').on('click', function(){
     cityInputEl.value = $('#M2').text();
     getCityWeather(cityInputEl.value);
   })
 
+  // function to display memory location 3 if clicked
   $('#M3').on('click', function(){
     cityInputEl.value = $('#M3').text();
     getCityWeather(cityInputEl.value);
   })
 
+  // function to display memory location 4 if clicked
   $('#M4').on('click', function(){
     cityInputEl.value = $('#M4').text();
     getCityWeather(cityInputEl.value);
   })
 
+  // function to display memory location 5 if clicked
   $('#M5').on('click', function(){
     cityInputEl.value = $('#M5').text();
     getCityWeather(cityInputEl.value);
   })
 
+  // function to display memory location 6 if clicked
   $('#M6').on('click', function(){
     cityInputEl.value = $('#M6').text();
     getCityWeather(cityInputEl.value);
   })
 
+  // function to display memory location 7 if clicked
   $('#M7').on('click', function(){
     cityInputEl.value = $('#M7').text();
     getCityWeather(cityInputEl.value);
   })
 
-  // read previous cities searched from localStorage
+  // read previous cities searched from localStorage on startup
   $.each(cityArray, function (i) {
     cityArray[i] = localStorage.getItem(i);
     $("#M"+ i).text(cityArray[i]);
