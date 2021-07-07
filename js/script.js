@@ -186,7 +186,9 @@ var removeDuplicates = function(input){
   };
   
   // eventlistner on both text change and dblclick
-  $('#searchbox').on('change dblclick', formSubmitHandler);
+  // $('#searchbox').on('change dblclick', formSubmitHandler);  
+  // eventlistner on click button
+  $('.button').on('click', formSubmitHandler);
 
   // function to display memory location 0 if clicked
   $('#M0').on('click', function(){
@@ -239,7 +241,12 @@ var removeDuplicates = function(input){
   // read previous cities searched from localStorage on startup
   $.each(cityArray, function (i) {
     cityArray[i] = localStorage.getItem(i);
-    $("#M"+ i).text(cityArray[i]);
+    if(cityArray[i] !== "") {
+      $("#M"+ i).text(cityArray[i]);
+    } else {
+      $("#M"+ i).text("");
+    }
+
     return;
   });
 })
